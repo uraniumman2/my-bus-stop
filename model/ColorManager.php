@@ -34,7 +34,7 @@ class ColorManager {
         return $this->aColors[($this->iAvailableColor++) % count($this->aColors)];
     }
 
-    public function getColorSettings() {
-        return $this->aMatches;
+    public static function getColorMatches() {
+        return self::aMatches;
     }
 }

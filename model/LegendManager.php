@@ -7,8 +7,8 @@ class LegendManager {
     const RECT_WIDTH    = 500;
     const FIRST_VERT_X  = 100;
     const SECOND_VERT_X = 350;
-    
-    public static function drawBackground($sBackgroundColor, $sFontColor) {
+
+    static function drawBackground($sBackgroundColor, $sFontColor) {
         $iRectWidth   = self::RECT_WIDTH;
         $iRectHeight  = self::RECT_HEIGHT;
         $iStrokeWidth = self::STROKE_WIDTH;
@@ -28,7 +28,7 @@ class LegendManager {
         return $sBgTemplate;
     }
 
-    public static function drawBusNumber($sBusNumber, $sFontColor) {
+    static function drawBusNumber($sBusNumber, $sFontColor) {
         $iFirstVertX = self::FIRST_VERT_X;
         $iOffsetX = $iFirstVertX / 2;
         $iOffsetY = 100;
@@ -37,7 +37,7 @@ class LegendManager {
         return $sNumberTemplate;
     }
 
-    public static function drawStopCaptions($sStartCaption, $sEndCaption, $sFontColor) {
+    static function drawStopCaptions($sStartCaption, $sEndCaption, $sFontColor) {
         $iFirstVertX = self::FIRST_VERT_X;
         $iOffsetX = self::FIRST_VERT_X + 10;
         $iOffsetY = 30;
@@ -49,7 +49,7 @@ class LegendManager {
         return $sCaptionTemplate;
     }
     
-    public static function drawWorkingHours($sFwrdTime, $sBwrdTime, $sFontColor) {
+    static function drawWorkingHours($sFwrdTime, $sBwrdTime, $sFontColor) {
         $iOffsetX = self::FIRST_VERT_X + (self::SECOND_VERT_X - self::FIRST_VERT_X) / 2;
         $iOffsetY = self::FIRST_VERT_X + 5;
         // <!-- Working hours -->
@@ -63,7 +63,7 @@ class LegendManager {
         return $sWorkingHoursTemplate;
     }
 
-    public static function drawInterval($sTimeInterval, $sFontColor) {
+    static function drawInterval($sTimeInterval, $sFontColor) {
         $iOffsetX = self::SECOND_VERT_X + (self::RECT_WIDTH - self::SECOND_VERT_X) / 2;
         $iOffsetY = 130;
         $sIntervalTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"48\" font-weight=\"700\" text-anchor=\"middle\">{$sTimeInterval}</text>";
@@ -71,22 +71,36 @@ class LegendManager {
         return $sIntervalTemplate;
     }
 
-    public static function generateSVG($sTemplate) {
-        
-    }
-
-    public static function drawBusInfo($sBackgroundColor, $sFontColor, $sBusNumber, $sStartCaption, $sEndCaption, $sFwrdTime, $sBwrdTime, $sTimeInterval) {
+    static function drawBusInfoRect($sBackgroundColor, $sFontColor, $sBusNumber, $sStartCaption, $sEndCaption, $sFwrdTime, $sBwrdTime, $sTimeInterval, $sCoordY) {
         $iRectHeight = self::RECT_HEIGHT;
         $iRectWidth  = self::RECT_WIDTH;
-        $sTemplate  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $sTemplate .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iRectWidth}\" height=\"{$iRectHeight}\" viewBox=\"0 0 {$iRectWidth} {$iRectHeight}\" version=\"1.1\">\n";
+        $sTemplate  = "<svg x=\"0\" y=\"{$sCoordY}\" width=\"{$iRectWidth}\" height=\"{$iRectHeight}\" viewBox=\"0 0 {$iRectWidth} {$iRectHeight}\">\n";
         $sTemplate .= self::drawBackground($sBackgroundColor, $sFontColor);
         $sTemplate .= self::drawBusNumber($sBusNumber, $sFontColor);
         $sTemplate .= self::drawStopCaptions($sStartCaption, $sEndCaption, $sFontColor);
         $sTemplate .= self::drawWorkingHours($sFwrdTime, $sBwrdTime, $sFontColor);
         $sTemplate .= self::drawInterval($sTimeInterval, $sFontColor);
-        $sTemplate .= "</svg>\n";
+        $sTemplate .= "\n</svg>\n";
 
         return $sTemplate;
+    }
+
+    public static function drawLegend() {
+        $aBusColors = \model\ColorManager::getColorMatches();
+        $iTotalCount = count($aBusColors);
+        $iOffsetY = 5;
+        $iCount = 0;
+        $iRectHeight = self::RECT_HEIGHT * $iTotalCount + $iOffsetY * ($iTotalCount - 1);
+        $iRectWidth  = self::RECT_WIDTH;
+        $sLegendTemplate  = "<svg width=\"{$iRectWidth}\" height=\"{$iRectHeight}\" viewBox=\"0 0 {$iRectWidth} {$iRectHeight}\">\n";
+        foreach($aBusColors AS $sBusId => $sBusColor) {
+            $aBusLegendData = \model\Util::getBusLegendData($sBusId);
+            if(!empty($aBusLegendData)) {
+                $sLegendTemplate .= self::drawBusInfoRect($sBusColor, 'white', $aBusLegendData['bus_number'], $aBusLegendData['caption_start'], $aBusLegendData['caption_end'], $aBusLegendData['frwd'], $aBusLegendData['bkwd'], $aBusLegendData['time_interval'], $iCount * ($iRectHeight + $iOffsetY));
+            }
+        }
+        $sLegendTemplate .= "</svg>";
+
+        return $sLegendTemplate;
     }
 }

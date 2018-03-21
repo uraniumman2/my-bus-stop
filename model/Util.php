@@ -22,12 +22,8 @@
             return $aData;
         }
 
-        static function getBusData($sBusId) {
-            $query = 'SELECT * FROM bus_list WHERE bus_id = "' .$sBusId. '"';
-            return getData($query);
-        }
-
-        static function getBusLegendData($sBusId) {
+        public static function getBusLegendData($sBusId) {
+            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             $query = 'SELECT * FROM bus_legend_info WHERE bus_id = "' .$sBusId. '"';
             return getData($query);
         }
