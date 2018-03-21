@@ -21,7 +21,7 @@ function updateDateBase($conn)
         $aResponsePOST = json_decode(curl_exec($curl), true);
         curl_close($curl);
         $accessToken = isset($aResponsePOST['access_token']) ? $aResponsePOST['access_token'] : '';
-
+//
 // print_r($accessToken);
         $aResponseGET = array();
         $curl = curl_init();
