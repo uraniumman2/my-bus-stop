@@ -86,7 +86,8 @@ class LegendManager {
     }
 
     public static function drawLegend() {
-        $aBusColors = \model\ColorManager::getColorMatches();
+        $oColorMngr = \model\ColorManager::getInstance();
+        $aBusColors = $oColorMngr->getColorMatches();
         $iTotalCount = count($aBusColors);
         $iOffsetY = 5;
         $iCount = 0;
