@@ -9,12 +9,10 @@
         static function getXYString($dX, $dY) {
             return $dX . ','. ( CANVAS_HEIGHT - $dY );
         }
-
-        static function getBusData($sBusId) {
+        static function getData($sQuery) {
             $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-            $query = 'SELECT * FROM bus_list WHERE bus_id = "' .$sBusId. '"';
             // Get Result
-            $result = mysqli_query($conn, $query);
+            $result = mysqli_query($conn, $sQuery);
             // Fetch Data
             $aData = mysqli_fetch_all($result, MYSQLI_ASSOC);
             // Free Result
@@ -24,18 +22,14 @@
             return $aData;
         }
 
+        static function getBusData($sBusId) {
+            $query = 'SELECT * FROM bus_list WHERE bus_id = "' .$sBusId. '"';
+            return getData($query);
+        }
+
         static function getBusLegendData($sBusId) {
-            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             $query = 'SELECT * FROM bus_legend_info WHERE bus_id = "' .$sBusId. '"';
-            // Get Result
-            $result = mysqli_query($conn, $query);
-            // Fetch Data
-            $aData = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            // Free Result
-            mysqli_free_result($result);
-            // Close Connection
-            mysqli_close($conn);
-            return $aData;
+            return getData($query);
         }
 
         static function getForwardBusStops($aBusStops, $sCurCoord) {
