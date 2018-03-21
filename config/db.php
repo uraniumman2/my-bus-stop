@@ -40,28 +40,16 @@ function updateDateBase($conn)
         $aBuses = array();
         $aLegends = array();
         foreach ($aResponseGET['buses'] AS $aBus) {
-            $aCaptions = explode("-", $aBus['Caption']);
-            if (count($aCaptions) == 2) {
-                $aLegends[$aBus['ObjectId']] = array(
-                    'bus_number' => $aBus['BusNumber'],
-                    'caption_start' => $aCaptions[0],
-                    'caption_end' => $aCaptions[1],
-                    'order_index' => $aBus['OrderIndex'],
-                    'frwd' => $aBus['frwd'],
-                    'bkwd' => $aBus['bkwd'],
-                    'time_interval' => $aBus['interval']
-                );
-            } else {
-                $aLegends[$aBus['ObjectId']] = array(
-                    'bus_number' => $aBus['BusNumber'],
-                    'caption_start' => $aCaptions[0],
-                    'caption_end' => $aCaptions[0],
-                    'order_index' => $aBus['OrderIndex'],
-                    'frwd' => $aBus['frwd'],
-                    'bkwd' => $aBus['bkwd'],
-                    'time_interval' => $aBus['interval']
-                );
-            }
+            $aCaptions = explode("-", $aBus['Caption'], 2);
+            $aLegends[$aBus['ObjectId']] = array(
+                'bus_number' => $aBus['BusNumber'],
+                'caption_start' => $aCaptions[0],
+                'caption_end' => $aCaptions[count($aCaptions) == 2 ? 1 : 0],
+                'order_index' => $aBus['OrderIndex'],
+                'frwd' => $aBus['frwd'],
+                'bkwd' => $aBus['bkwd'],
+                'time_interval' => $aBus['interval']
+            );
             foreach ($aBus['Routes'] AS $aRoute) {
 // Заполняем все поля остановки
                 foreach ($aRoute['Stops'] AS $aStop) {
