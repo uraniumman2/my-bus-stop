@@ -7,7 +7,7 @@ if (mysqli_connect_errno()) {
 // Connection Failed
     echo 'Failed to connect to MySQL ' . mysqli_connect_errno();
 } else {
-    updateDateBase($conn);
+//    updateDateBase($conn);
 }
 function updateDateBase($conn)
 {
@@ -40,17 +40,17 @@ function updateDateBase($conn)
         $aBuses = array();
         $aLegends = array();
         foreach ($aResponseGET['buses'] AS $aBus) {
-            $aCaptions = explode("-", $aBus['Caption'], 2);
-            $aLegends[$aBus['ObjectId']] = array(
-                'bus_number' => $aBus['BusNumber'],
-                'caption_start' => $aCaptions[0],
-                'caption_end' => $aCaptions[count($aCaptions) == 2 ? 1 : 0],
-                'order_index' => $aBus['OrderIndex'],
-                'frwd' => $aBus['frwd'],
-                'bkwd' => $aBus['bkwd'],
-                'time_interval' => $aBus['interval']
-            );
             foreach ($aBus['Routes'] AS $aRoute) {
+                $aCaptions = explode("-", $aRoute['Caption'], 2);
+                $aLegends[$aRoute['ObjectId']] = array(
+                    'bus_number' => $aRoute['BusNumber'],
+                    'caption_start' => $aCaptions[0],
+                    'caption_end' => $aCaptions[count($aCaptions) == 2 ? 1 : 0],
+                    'order_index' => $aRoute['OrderIndex'],
+                    'frwd' => $aBus['frwd'],
+                    'bkwd' => $aBus['bkwd'],
+                    'time_interval' => $aBus['interval']
+                );
 // Заполняем все поля остановки
                 foreach ($aRoute['Stops'] AS $aStop) {
                     if (isset($aStops[$aStop['BusStopId']])) {

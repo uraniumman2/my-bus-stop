@@ -3,7 +3,7 @@ namespace model;
 // THIS IS SINGLETON MAZAFAKA
 class ColorManager {
     private $aMatches = array();
-    private $aColors = array('red', 'blue', 'green', 'yellow', 'purple', 'orange', 'darkblue', 'pink', 'brown', 'cyan');
+    private $aColors = array('red', 'blue', 'green', /*'yellow',*/ 'purple', 'orange', 'darkblue', 'pink', 'brown', 'cyan');
     private $iAvailableColor = 0;
     private static $oInstance;
     const INITIAL_COLOR_VAL = 0;
@@ -34,7 +34,7 @@ class ColorManager {
         return $this->aColors[($this->iAvailableColor++) % count($this->aColors)];
     }
 
-    public static function getColorMatches() {
-        return self::aMatches;
+    public function getColorMatches() {
+        return $this->aMatches;
     }
 }

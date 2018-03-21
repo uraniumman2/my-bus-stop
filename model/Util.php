@@ -23,9 +23,13 @@
         }
 
         public static function getBusLegendData($sBusId) {
-            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             $query = 'SELECT * FROM bus_legend_info WHERE bus_id = "' .$sBusId. '"';
-            return getData($query);
+            return self::getData($query);
+        }
+
+        static function getBusData($sBusId) {
+            $query = 'SELECT * FROM bus_list WHERE bus_id = "' .$sBusId. '"';
+            return self::getData($query);
         }
 
         static function getForwardBusStops($aBusStops, $sCurCoord) {
