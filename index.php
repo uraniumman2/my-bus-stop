@@ -10,7 +10,7 @@
         <select id="bus_stop" class="form-control">
             <?php foreach($aList AS $aStop) { ?>
                 <option value="<?php echo $aStop['bus_stop_id']?>" data-value='<?php echo $aStop["buses"] ?>' data-coord='<?php echo $aStop["coord"] ?>'><?php echo $aStop['caption'] ?></option>
-            <?php } ?>
+            <?php } ?><!-- Shark 8-->
         </select>
     </div>
     <br>
