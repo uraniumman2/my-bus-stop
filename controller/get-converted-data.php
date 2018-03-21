@@ -35,5 +35,5 @@
     // $sTemplateLegend = model\LegendManager::drawInterval('7-15', 'white');
      $sTemplateLegend = model\LegendManager::drawBusInfo('red', 'white', 51, 'Caption 1', 'Caption 2', '7:00 - 22:30', '7:30 - 22:10', '7-15');
      echo $sTemplateLegend;
-    
+    // ЛЕХА СУЧКА
     // echo json_encode($aFetchedData);
