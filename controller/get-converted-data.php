@@ -21,18 +21,19 @@
         $oColorMngr->setColor($sBus);
         $sPolylines .= model\Util::getPolyline($aRoute, $oColorMngr->getColor($sBus));
     }
-    // $sTemplate = model\Util::getSVGTemplate();
+    // $sTemplate = model\Util::getSVGTemplate(); // testing
     // if($sTemplate) {
     //     $sTemplate .= $sPolylines;
     //     $sTemplate .= '</svg>';
     // }
+//    echo $sPolylines;
     // TODO: Написать модель для сохранения svg файла который возвращает ссылку на объект с генерируемый по дате
     // $sTemplateLegend = model\LegendManager::getBackground('red', 'white');
     // $sTemplateLegend = model\LegendManager::drawBusNumber(51, 'white');
     // $sTemplateLegend = model\LegendManager::drawStopCaptions('Caption 1', 'Caption 2', 'white');
     // $sTemplateLegend = model\LegendManager::drawWorkingHours('7:00 - 22:30', '7:30 - 22:10', 'white');
     // $sTemplateLegend = model\LegendManager::drawInterval('7-15', 'white');
-    $sTemplateLegend = model\LegendManager::drawBusInfo('red', 'white', 51, 'Caption 1', 'Caption 2', '7:00 - 22:30', '7:30 - 22:10', '7-15');
-    echo $sTemplateLegend;
+     $sTemplateLegend = model\LegendManager::drawBusInfo('red', 'white', 51, 'Caption 1', 'Caption 2', '7:00 - 22:30', '7:30 - 22:10', '7-15');
+     echo $sTemplateLegend;
     
     // echo json_encode($aFetchedData);
