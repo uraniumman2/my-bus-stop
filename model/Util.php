@@ -24,6 +24,20 @@
             return $aData;
         }
 
+        static function getBusLegendData($sBusId) {
+            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            $query = 'SELECT * FROM bus_legend_info WHERE bus_id = "' .$sBusId. '"';
+            // Get Result
+            $result = mysqli_query($conn, $query);
+            // Fetch Data
+            $aData = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            // Free Result
+            mysqli_free_result($result);
+            // Close Connection
+            mysqli_close($conn);
+            return $aData;
+        }
+
         static function getForwardBusStops($aBusStops, $sCurCoord) {
             $aData = array();
             $isFound = false;
