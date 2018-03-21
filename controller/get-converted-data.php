@@ -2,6 +2,7 @@
     require('../model/Util.php');
     require('../model/ColorManager.php');
     require('../model/LegendManager.php');
+    require('../model/BoundaryManager.php');
 
     $aRequestData = json_decode(file_get_contents('php://input'), true);
     // print_r($aRequestData);
@@ -34,7 +35,9 @@
     // $sTemplateLegend = model\LegendManager::drawWorkingHours('7:00 - 22:30', '7:30 - 22:10', 'white');
     // $sTemplateLegend = model\LegendManager::drawInterval('7-15', 'white');
 //     $sTemplateLegend = model\LegendManager::drawBusInfo('red', 'white', 51, 'Caption 1', 'Caption 2', '7:00 - 22:30', '7:30 - 22:10', '7-15');
-     $sTemplateLegend = model\LegendManager::drawLegend();
-     echo $sTemplateLegend;
-    // ЛЕХА СУЧКА
+//     $sTemplateLegend = model\LegendManager::drawLegend();
+//     echo $sTemplateLegend;
+
+    $oBoundaryMngr = \model\BoundaryManager::getInstance();
+    print_r($oBoundaryMngr->getBoundaries());
     // echo json_encode($aFetchedData);

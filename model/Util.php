@@ -33,6 +33,7 @@
         }
 
         static function getForwardBusStops($aBusStops, $sCurCoord) {
+            $oBoundaryMngr = \model\BoundaryManager::getInstance();
             $aData = array();
             $isFound = false;
             // print_r($sCurCoord);
@@ -44,6 +45,7 @@
                     $dNewY   = self::getConvertedValue($aBusStop['Coord']['Lng'], START_LTD, Y_MULTIPLIER);
                     $dNewX   = self::getConvertedValue($aBusStop['Coord']['Ltd'], START_LNG, X_MULTIPLIER);
                     $aData[] = self::getXYString($dNewX, $dNewY);
+                    $oBoundaryMngr->compareCoords($dNewX, $dNewY);
                 }
             }
             return $aData;
