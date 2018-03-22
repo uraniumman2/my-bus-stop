@@ -1,19 +1,12 @@
 <?php
 
+namespace model;
+
 class LayoutManager {
 
     const LAYOUT_HEIGHT  = 2523;
     const LAYOUT_WIDTH   = 3567;
 
-    static function drawHeader($sBusCaption) {
-        $iLayoutWidth = self::LAYOUT_WIDTH;
-
-        $file = '../src/assets/astana-gerb.svg';
-        $sAstanaGerb = file_get_contents($file);
-        $sHeader = $sAstanaGerb;
-        $sHeaderRect = '';
-        return $sHeader;
-    }
 
     static function drawHeaderTitle($sKazCaption = 'АСТАНА ҚАЛАСЫНЫҢ ҚОҒАМДЫҚ КӨЛІКТЕРІНІҢ ЖҮРІС СЫЗБАСЫ', $sEngCaption = 'SCHEME OF ASTANA PUBLIC TRANSPORT ROUTES') {
         $sHeaderCaption = "<text x=\"3212\" y=\"100\" fill=\"white\" font-size=\"60\" font-weight=\"700\" font-family=\"Century\" text-anchor=\"end\">";
@@ -33,7 +26,7 @@ class LayoutManager {
         return $sHeaderCaption;
     }
 
-    static function drawHeaderRect() {
+    static function drawHeader($sBusCaptionKaz, $sBusCaptionEng) {
 
         // <!-- Background -->
         $sTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -53,10 +46,10 @@ class LayoutManager {
         $sTemplate .= $sAstraLogo;
 
         //<!-- Bus Stop Caption -->
-        $sTemplate .= self::drawHeaderBusCaption('НАЗАРБАЕВ УНИВЕРСИТЕТІ АЯЛДАМАСЫ', 'NAZARBAYEV UNIVERSITY BUS STOP');
+        $sTemplate .= self::drawHeaderBusCaption($sBusCaptionKaz, $sBusCaptionEng);
 
         //<!-- Expo Logo Placeholder -->
-        $sExpoLogo = file_get_contents('../src/assets/expo.svg');
+        $sExpoLogo = file_get_contents('../src/assets/expo-logo.svg');
         $sTemplate .= $sExpoLogo;
 
         //<!-- Compass Logo Placeholder -->
@@ -68,7 +61,7 @@ class LayoutManager {
         return $sTemplate;
     }
 
-    public static function getSVGLayout($sBusCaption) {
+    public static function drawSVGLayout($sBusCaptionKaz, $sBusCaptionEng) {
         //841x1189mm A0 size
         //2523x3567 Formatted
 
@@ -77,7 +70,10 @@ class LayoutManager {
 
 
         $sLayoutTemplate  = "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iLayoutWidth}\" height=\"{$iLayoutHeight}\" viewBox=\"0 0 {$iLayoutWidth} {$iLayoutHeight}\" version=\"1.1\">\n";;
-        $sLayoutTemplate .= self::drawHeader($sBusCaption);
+        $sLayoutTemplate .= self::drawHeader($sBusCaptionKaz, $sBusCaptionEng);
         $sLayoutTemplate .= "</svg>";
+
+        file_put_contents('../src/php_layout_test.svg', $sLayoutTemplate);
+//        return $sLayoutTemplate;
     }
 }

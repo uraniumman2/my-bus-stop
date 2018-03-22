@@ -3,6 +3,7 @@
     require('../model/ColorManager.php');
     require('../model/LegendManager.php');
     require('../model/BoundaryManager.php');
+    require('../model/LayoutManager.php');
 
 $aRequestData = json_decode(file_get_contents('php://input'), true);
 // print_r($aRequestData);
@@ -45,6 +46,7 @@ foreach ($aBusCollection AS $i => $sBusId) {
 $oBoundaryMngr = \model\BoundaryManager::getInstance();
 //    print_r($oBoundaryMngr->getBoundaries());
 //    print_r($oBoundaryMngr->getCropBoundaries(200, 200));
-\model\Util::getSVGTemplate($sPolylines);
+model\LayoutManager::drawSVGLayout('НАЗАРБАЕВ УНИВЕРСИТЕТІ АЯЛДАМАСЫ', 'NAZARBAYEV UNIVERSITY BUS STOP');
+
 echo 'SUCCESS';
 // echo json_encode($aFetchedData);
