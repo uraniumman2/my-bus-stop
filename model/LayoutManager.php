@@ -29,35 +29,34 @@ class LayoutManager {
     static function drawHeader($sBusCaptionKaz, $sBusCaptionEng) {
 
         // <!-- Background -->
-        $sTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $sTemplate .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"3567\" height=\"600\" viewBox=\"0 0 3567 600\" version=\"1.1\">";
+        $sTemplate  = "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"3567\" height=\"600\" viewBox=\"0 0 3567 600\" version=\"1.1\">\n";
         // <!-- Header Background color -->
         $sTemplate .= "<polygon points=\"300,25 3337,25 3337,200 300,200\" style=\"fill:#bf1e2e;stroke:white;stroke-width:1\" />";
 
         //<!-- Astana Gerb Logo -->
         $sAstanaGerb = file_get_contents('../src/assets/astana-gerb.svg');
-        $sTemplate .= $sAstanaGerb;
+        $sTemplate .= $sAstanaGerb . "\n";
 
         //<!-- Astra Header Title  -->
         $sTemplate .= self::drawHeaderTitle();
 
         //<!-- Astra Logo Placeholder -->
         $sAstraLogo = file_get_contents('../src/assets/astra-logo.svg');
-        $sTemplate .= $sAstraLogo;
+        $sTemplate .= $sAstraLogo . "\n";
 
         //<!-- Bus Stop Caption -->
         $sTemplate .= self::drawHeaderBusCaption($sBusCaptionKaz, $sBusCaptionEng);
 
         //<!-- Expo Logo Placeholder -->
         $sExpoLogo = file_get_contents('../src/assets/expo-logo.svg');
-        $sTemplate .= $sExpoLogo;
+        $sTemplate .= $sExpoLogo . "\n";
 
         //<!-- Compass Logo Placeholder -->
         $sCompass = file_get_contents( '../src/assets/compass.svg');
-        $sTemplate .= $sCompass;
+        $sTemplate .= $sCompass . "\n";
 
         // closing SVG tag
-        $sTemplate .= "</svg>";
+        $sTemplate .= "</svg>\n";
         return $sTemplate;
     }
 
@@ -69,9 +68,10 @@ class LayoutManager {
         $iLayoutHeight = self::LAYOUT_HEIGHT;
 
 
-        $sLayoutTemplate  = "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iLayoutWidth}\" height=\"{$iLayoutHeight}\" viewBox=\"0 0 {$iLayoutWidth} {$iLayoutHeight}\" version=\"1.1\">\n";;
+        $sLayoutTemplate  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $sLayoutTemplate .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iLayoutWidth}\" height=\"{$iLayoutHeight}\" viewBox=\"0 0 {$iLayoutWidth} {$iLayoutHeight}\" version=\"1.1\">\n";
         $sLayoutTemplate .= self::drawHeader($sBusCaptionKaz, $sBusCaptionEng);
-        $sLayoutTemplate .= "</svg>";
+        $sLayoutTemplate .= "</svg>"; // END SVG TAG
 
         file_put_contents('../src/php_layout_test.svg', $sLayoutTemplate);
 //        return $sLayoutTemplate;
