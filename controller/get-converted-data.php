@@ -9,20 +9,21 @@ $aRequestData = json_decode(file_get_contents('php://input'), true);
 // print_r($aRequestData);
 $aBuses = json_decode($aRequestData['buses'], true);
 $sCurCoord = $aRequestData['current_coord'];
-$dOffsetX = 1.5;
-$dOffsetY = 1;
+$dOffsetX = RAINBOW_OFFSET_X;
+$dOffsetY = RAINBOW_OFFSET_Y;
 $sPolylines = '';
 $oColorMngr = model\ColorManager::getInstance();
 $oColorMngr->clearMatches();
 $aAllBusRoutes = array();
 $aBusCollection = array();
+$aBusNumber = array();
 foreach ($aBuses AS $sBusId) {
     $aBusInfo = model\Util::getBusInfo($sBusId, $sCurCoord);
     // $aFetchedData[] = array($sBus => $aBusInfo);
     $aRoute = $aBusInfo['route'];
-
     if (empty($aRoute))
         continue;
+    $aBusNumber[] = $aBusInfo['bus_number'];
     $aBusCollection[] = $sBusId;
     $aAllBusRoutes[] = $aBusInfo['route'];
 
@@ -40,8 +41,10 @@ foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
 
 
 foreach ($aBusCollection AS $i => $sBusId) {
-    $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId));
+    $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId),$aBusNumber[count($aBusNumber)-$i-1]);
 }
+    $sPolylines .= model\Util::getStartStopCircle($sCurCoord);
+
 
 $oBoundaryMngr = \model\BoundaryManager::getInstance();
 //    print_r($oBoundaryMngr->getBoundaries());
