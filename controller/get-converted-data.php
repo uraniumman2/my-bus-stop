@@ -6,7 +6,7 @@
     require('../model/LayoutManager.php');
 
 $aRequestData = json_decode(file_get_contents('php://input'), true);
-// print_r($aRequestData);
+ print_r($aRequestData);
 $aBuses = json_decode($aRequestData['buses'], true);
 $sCurCoord = $aRequestData['current_coord'];
 $dOffsetX = RAINBOW_OFFSET_X;
@@ -43,14 +43,14 @@ foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
 foreach ($aBusCollection AS $i => $sBusId) {
     $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId),$aBusNumber[count($aBusNumber)-$i-1]);
 }
-echo model\Util::getStartStopCircle($sCurCoord);
+//echo model\Util::getStartStopCircle($sCurCoord);
 $sPolylines .= model\Util::getStartStopCircle($sCurCoord);
 
 
 $oBoundaryMngr = \model\BoundaryManager::getInstance();
 //    print_r($oBoundaryMngr->getBoundaries());
 //    print_r($oBoundaryMngr->getCropBoundaries(200, 200));
-//model\LayoutManager::drawSVGLayout('НАЗАРБАЕВ УНИВЕРСИТЕТІ АЯЛДАМАСЫ', 'NAZARBAYEV UNIVERSITY BUS STOP');
-model\Util::getSVGTemplate($sPolylines);
+model\LayoutManager::drawSVGLayout($aRequestData['caption'],$aRequestData['caption'], $sPolylines);
+//model\Util::getSVGMap($sPolylines);
 echo 'SUCCESS';
 // echo json_encode($aFetchedData);

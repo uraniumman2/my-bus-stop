@@ -142,15 +142,15 @@ class Util
         $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(100, 100);
         list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
 
-        $sSVGHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
+        $sSVGHeader = "<svg width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
 
         $sMapTemplate = $sSVGHeader . $sMapTemplate;
         $sMapTemplate .= $sPolylines;
-        $sMapTemplate .= ($sSVGFooter = '</svg>');
+        $sMapTemplate .= "</svg>\n";
 
         // Generating
-        $fileOutput = '../src/php_output_test.svg';
-        file_put_contents($fileOutput, $sMapTemplate);
+//        $fileOutput = '../src/php_output_test.svg';
+//        file_put_contents($fileOutput, $sMapTemplate);
+        return $sMapTemplate;
     }
 }

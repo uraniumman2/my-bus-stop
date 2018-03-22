@@ -22,10 +22,11 @@
             var iBusId = $(this).val();
             var dataValue = $(this).find('[value="' + iBusId + '"]').attr('data-value');
             var coord = $(this).find('[value="' + iBusId + '"]').attr('data-coord');
+            var caption = $(this).find(':selected').text();
             $.ajax({
                 type: "POST",
                 url: "http://localhost/my-bus-stop/controller/get-converted-data.php",
-                data: JSON.stringify({ buses: dataValue, current_coord: coord}),
+                data: JSON.stringify({ buses: dataValue, current_coord: coord, caption: caption}),
                 processData: false,
                 async: false,
                 contentType: "application/json"

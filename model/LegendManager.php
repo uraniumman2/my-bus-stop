@@ -93,7 +93,7 @@ class LegendManager
         return $sTemplate;
     }
 
-    public static function drawLegend()
+    public static function drawLegend($iCoordX, $iCoordY)
     {
         $oColorMngr = \model\ColorManager::getInstance();
         $aBusColors = $oColorMngr->getColorMatches();
@@ -103,7 +103,7 @@ class LegendManager
         $iRectHeight = self::RECT_HEIGHT;
         $iRectWidth = self::RECT_WIDTH;
         $iLegendHeight = self::RECT_HEIGHT * $iTotalCount + $iOffsetY * ($iTotalCount - 1);
-        $sLegendTemplate = "<svg x=\"0\" y=\"0\" width=\"{$iRectWidth}\" height=\"{$iLegendHeight}\" viewBox=\"0 0 {$iRectWidth} {$iLegendHeight}\">\n";
+        $sLegendTemplate = "<svg x=\"{$iCoordX}\" y=\"{$iCoordY}\" width=\"{$iRectWidth}\" height=\"{$iLegendHeight}\" viewBox=\"0 0 {$iRectWidth} {$iLegendHeight}\">\n";
         foreach ($aBusColors AS $sBusId => $sBusColor) {
             echo "\n";
             $aBusLegendData = \model\Util::getBusLegendData($sBusId)[0];
