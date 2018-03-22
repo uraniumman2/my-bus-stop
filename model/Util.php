@@ -142,8 +142,7 @@ class Util
         $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(CROP_PADDING_OFFSET_X, CROP_PADDING_OFFSET_Y);
         list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
 
-        $sSVGHeader = "<svg width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
-
+        $sSVGHeader = "<svg x=\"800\" y=\"550\" width=\"1520pt\" height=\"1287pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
         $sMapTemplate = $sSVGHeader . $sMapTemplate;
         $sMapTemplate .= $sPolylines;
         $sMapTemplate .= "</svg>\n";

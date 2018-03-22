@@ -104,11 +104,12 @@ class LegendManager
         $iRectWidth = self::RECT_WIDTH;
         $iLegendHeight = self::RECT_HEIGHT * $iTotalCount + $iOffsetY * ($iTotalCount - 1);
         $sLegendTemplate = "<svg x=\"{$iCoordX}\" y=\"{$iCoordY}\" width=\"{$iRectWidth}\" height=\"{$iLegendHeight}\" viewBox=\"0 0 {$iRectWidth} {$iLegendHeight}\">\n";
+        $aColors = array('#ee1d23', '#2e3092', '#f58220', '#00aeef', '#00a54f', '#a54586', '#6c6d70','#188500' , '#990000');
         foreach ($aBusColors AS $sBusId => $sBusColor) {
             echo "\n";
             $aBusLegendData = \model\Util::getBusLegendData($sBusId)[0];
             if (!empty($aBusLegendData)) {
-                $sLegendTemplate .= self::drawBusInfoRect($sBusColor, 'white', $aBusLegendData['bus_number'], $aBusLegendData['caption_start'], $aBusLegendData['caption_end'], $aBusLegendData['frwd'], $aBusLegendData['bkwd'], $aBusLegendData['time_interval'], ($iCount++ * ($iRectHeight + $iOffsetY)));
+                $sLegendTemplate .= self::drawBusInfoRect($aColors[($iTotalCount - 1 - $iCount)%count($aColors)], 'white', $aBusLegendData['bus_number'], $aBusLegendData['caption_start'], $aBusLegendData['caption_end'], $aBusLegendData['frwd'], $aBusLegendData['bkwd'], $aBusLegendData['time_interval'], ($iCount++ * ($iRectHeight + $iOffsetY)));
             }
         }
         $sLegendTemplate .= "</svg>";
