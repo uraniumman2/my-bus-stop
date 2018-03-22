@@ -118,7 +118,7 @@ class Util
         $sFontStyle = strlen($sBusNumber) <= 2 ? 'style="font-weight:bold;"' : '';
         $dCorrector = strlen($sBusNumber) <= 2 ? 0 : 1;
         $sFinalStopCircle = '<circle cx="' . $sFinalStop[0] . '" cy="' . $sFinalStop[1] . '" r="' . $sCircleRadius . '" fill="' . $sColor . '"/>';
-        $sFinalStopCircle .= '<text x="' . $sFinalStop[0] . '" y="' . (doubleval($sFinalStop[1]) + doubleval($sCircleRadius) / 2 - $dCorrector) . '" fill="#ffffff" font-family="Century gothic" font-size = "12" text-anchor="middle" alignment-baseline="middle"><tspan ' . $sFontStyle . '>' . $sBusNumber . '</tspan></text>';
+        $sFinalStopCircle .= '<text x="' . $sFinalStop[0] . '" y="' . (doubleval($sFinalStop[1]) + doubleval($sCircleRadius) / 2 - $dCorrector) . '" fill="#ffffff" font-family="'.FONT_FAMILY.'" font-size = "12" text-anchor="middle" alignment-baseline="middle"><tspan ' . $sFontStyle . '>' . $sBusNumber . '</tspan></text>';
         return $sFinalStopCircle;
     }
 
