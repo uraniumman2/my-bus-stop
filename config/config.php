@@ -12,5 +12,7 @@
     define('Y_MULTIPLIER', '7119.63');
     define('CANVAS_HEIGHT', 1839);
     define('CANVAS_WIDTH', 2171);
-    define('STROKE_WIDTH', '1.4');
-    
+    define('STROKE_WIDTH', '3');
+    define('RAINBOW_OFFSET_X', '4');
+    define('RAINBOW_OFFSET_Y', '4');
+    define('CIRCLE_RADIUS', '10');
