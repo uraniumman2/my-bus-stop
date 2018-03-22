@@ -43,13 +43,14 @@ foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
 foreach ($aBusCollection AS $i => $sBusId) {
     $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId),$aBusNumber[count($aBusNumber)-$i-1]);
 }
-    $sPolylines .= model\Util::getStartStopCircle($sCurCoord);
+echo model\Util::getStartStopCircle($sCurCoord);
+$sPolylines .= model\Util::getStartStopCircle($sCurCoord);
 
 
 $oBoundaryMngr = \model\BoundaryManager::getInstance();
 //    print_r($oBoundaryMngr->getBoundaries());
 //    print_r($oBoundaryMngr->getCropBoundaries(200, 200));
-model\LayoutManager::drawSVGLayout('НАЗАРБАЕВ УНИВЕРСИТЕТІ АЯЛДАМАСЫ', 'NAZARBAYEV UNIVERSITY BUS STOP');
-
+//model\LayoutManager::drawSVGLayout('НАЗАРБАЕВ УНИВЕРСИТЕТІ АЯЛДАМАСЫ', 'NAZARBAYEV UNIVERSITY BUS STOP');
+model\Util::getSVGTemplate($sPolylines);
 echo 'SUCCESS';
 // echo json_encode($aFetchedData);
