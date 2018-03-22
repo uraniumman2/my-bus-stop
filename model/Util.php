@@ -100,7 +100,6 @@ class Util
 
     public static function getPolyline($aRoute, $sColor, $sBusNumber)
     {
-
         $sPolyline = '<polyline points="';
         foreach ($aRoute AS $sCoord) {
             $sPolyline .= $sCoord . ' ';
