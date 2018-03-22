@@ -124,11 +124,10 @@ class Util
 
     public static function getStartStopCircle($sCurCoord)
     {
-        $aCurCoord = json_decode($sCurCoord,true);
-        print_r($aCurCoord);
-        $dCenterX = self::getConvertedValue($aCurCoord['Lng'], START_LTD, Y_MULTIPLIER);
-        $dCenterY = self::getConvertedValue($aCurCoord['Ltd'], START_LNG, X_MULTIPLIER);
-        $sStartStopCircle = '<svg><circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="19" fill="#e64b3a" stroke="#ffffff" stroke-width="1"/><circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="15" fill="#c0392b" stroke="#ffffff" stroke-width="1"/><circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="10" fill="#ffffff"/></svg>';
+        $aCurCoord = json_decode($sCurCoord, true);
+        $dCenterY = (CANVAS_HEIGHT -self::getConvertedValue($aCurCoord['Lng'], START_LTD, Y_MULTIPLIER));
+        $dCenterX = self::getConvertedValue($aCurCoord['Ltd'], START_LNG, X_MULTIPLIER);
+        $sStartStopCircle = '<circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="19" fill="#e64b3a" stroke="#ffffff" stroke-width="1"/><circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="15" fill="#c0392b" stroke="#ffffff" stroke-width="1"/><circle cx="' . $dCenterX . '" cy="' . $dCenterY . '" r="9" fill="#ffffff"/>';
         return $sStartStopCircle;
     }
 
@@ -138,13 +137,13 @@ class Util
         $file = '../src/map_template.txt';
         $sMapTemplate = file_get_contents($file);
 
-            // Processing
-            $oBoundaryMngr = \model\BoundaryManager::getInstance();
-            $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(100, 100);
-            list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
+        // Processing
+        $oBoundaryMngr = \model\BoundaryManager::getInstance();
+        $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(100, 100);
+        list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
 
-            $sSVGHeader  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-            $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
+        $sSVGHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
 
         $sMapTemplate = $sSVGHeader . $sMapTemplate;
         $sMapTemplate .= $sPolylines;
