@@ -43,6 +43,8 @@ foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
 foreach ($aBusCollection AS $i => $sBusId) {
     $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId),$aBusNumber[count($aBusNumber)-$i-1]);
 }
+    $sPolylines .= model\Util::getStartStopCircle($sCurCoord);
+
 
 $oBoundaryMngr = \model\BoundaryManager::getInstance();
 //    print_r($oBoundaryMngr->getBoundaries());
