@@ -37,7 +37,7 @@ class LegendManager
         $iOffsetX = $iFirstVertX / 2;
         $iOffsetY = 100;
         // <!-- Bus number -->
-        $sNumberTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"72\" font-weight=\"700\" text-anchor=\"middle\">{$sBusNumber}</text>\n";
+        $sNumberTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"72\" font-family=\"Century gothic\" font-weight=\"700\" text-anchor=\"middle\">{$sBusNumber}</text>\n";
         return $sNumberTemplate;
     }
 
@@ -47,7 +47,7 @@ class LegendManager
         $iOffsetX = self::FIRST_VERT_X + 10;
         $iOffsetY = 30;
         // <!-- Bus stop caption -->
-        $sCaptionTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"24\" font-weight=\"700\">\n";
+        $sCaptionTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"24\" font-family=\"Century gothic\" font-weight=\"700\">\n";
         $sCaptionTemplate .= "<tspan>{$sStartCaption}</tspan>\n";
         $sCaptionTemplate .= "<tspan x=\"{$iOffsetX}\" dy=\"1.2em\">{$sEndCaption}</tspan>\n";
         $sCaptionTemplate .= "</text>\n";
@@ -59,7 +59,7 @@ class LegendManager
         $iOffsetX = self::FIRST_VERT_X + (self::SECOND_VERT_X - self::FIRST_VERT_X) / 2;
         $iOffsetY = self::FIRST_VERT_X + 5;
         // <!-- Working hours -->
-        $sWorkingHoursTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"24\" font-weight=\"700\" text-anchor=\"middle\">\n";
+        $sWorkingHoursTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"24\" font-family=\"Century gothic\" font-weight=\"700\" text-anchor=\"middle\">\n";
         // <!-- (forward) -->
         $sWorkingHoursTemplate .= "<tspan>{$sFwrdTime}</tspan>\n";
         // <!-- (backward) -->
@@ -73,7 +73,7 @@ class LegendManager
     {
         $iOffsetX = self::SECOND_VERT_X + (self::RECT_WIDTH - self::SECOND_VERT_X) / 2;
         $iOffsetY = 130;
-        $sIntervalTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"48\" font-weight=\"700\" text-anchor=\"middle\">{$sTimeInterval}</text>";
+        $sIntervalTemplate = "<text x=\"{$iOffsetX}\" y=\"{$iOffsetY}\" fill=\"{$sFontColor}\" font-size=\"48\" font-family=\"Century gothic\" font-weight=\"700\" text-anchor=\"middle\">{$sTimeInterval}</text>";
 
         return $sIntervalTemplate;
     }

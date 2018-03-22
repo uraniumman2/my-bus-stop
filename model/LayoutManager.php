@@ -9,7 +9,7 @@ class LayoutManager {
 
 
     static function drawHeaderTitle($sKazCaption = 'АСТАНА ҚАЛАСЫНЫҢ ҚОҒАМДЫҚ КӨЛІКТЕРІНІҢ ЖҮРІС СЫЗБАСЫ', $sEngCaption = 'SCHEME OF ASTANA PUBLIC TRANSPORT ROUTES') {
-        $sHeaderCaption = "<text x=\"3212\" y=\"100\" fill=\"white\" font-size=\"60\" font-weight=\"700\" font-family=\"Century\" text-anchor=\"end\">";
+        $sHeaderCaption = "<text x=\"3212\" y=\"100\" fill=\"white\" font-size=\"60\" font-weight=\"700\" font-family=\"Century gothic\" text-anchor=\"end\">";
         $sHeaderCaption .= "<tspan>{$sKazCaption}</tspan>";
         $sHeaderCaption .= "<tspan x=\"3212\" dy=\"1.2em\">{$sEngCaption}</tspan>";
         $sHeaderCaption .= "</text>";
@@ -18,7 +18,7 @@ class LayoutManager {
     }
 
     static function drawHeaderBusCaption($sKazCaption, $sEngCaption) {
-        $sHeaderCaption  = "<text x=\"1783\" y=\"350\" fill=\"black\" font-size=\"84\" font-weight=\"700\" font-family=\"Century\" text-anchor=\"middle\">";
+        $sHeaderCaption  = "<text x=\"1783\" y=\"350\" fill=\"black\" font-size=\"84\" font-weight=\"700\" font-family=\"Century gothic\" text-anchor=\"middle\">";
         $sHeaderCaption .= "<tspan>{$sKazCaption}</tspan>";
         $sHeaderCaption .= "<tspan x=\"1783\" dy=\"1.2em\">{$sEngCaption}</tspan>";
         $sHeaderCaption .= "</text>";
@@ -60,6 +60,13 @@ class LayoutManager {
         return $sTemplate;
     }
 
+    static function drawFooter() {
+        $sFooterTemplate = "";
+
+
+        return $sFooterTemplate;
+    }
+
     public static function drawSVGLayout($sBusCaptionKaz, $sBusCaptionEng) {
         //841x1189mm A0 size
         //2523x3567 Formatted
@@ -71,6 +78,8 @@ class LayoutManager {
         $sLayoutTemplate  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $sLayoutTemplate .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iLayoutWidth}\" height=\"{$iLayoutHeight}\" viewBox=\"0 0 {$iLayoutWidth} {$iLayoutHeight}\" version=\"1.1\">\n";
         $sLayoutTemplate .= self::drawHeader($sBusCaptionKaz, $sBusCaptionEng);
+
+        $sLayoutTemplate .= self::drawFooter();
         $sLayoutTemplate .= "</svg>"; // END SVG TAG
 
         file_put_contents('../src/php_layout_test.svg', $sLayoutTemplate);
