@@ -39,5 +39,8 @@
 //     echo $sTemplateLegend;
 
     $oBoundaryMngr = \model\BoundaryManager::getInstance();
-    print_r($oBoundaryMngr->getBoundaries());
+//    print_r($oBoundaryMngr->getBoundaries());
+//    print_r($oBoundaryMngr->getCropBoundaries(200, 200));
+    \model\Util::getSVGTemplate($sPolylines);
+    echo 'SUCCESS';
     // echo json_encode($aFetchedData);

@@ -10,6 +10,7 @@
     define('START_LNG', '71.2051');
     define('X_MULTIPLIER', '4467.3');
     define('Y_MULTIPLIER', '7119.63');
-    define('CANVAS_HEIGHT', '1839');
+    define('CANVAS_HEIGHT', 1839);
+    define('CANVAS_WIDTH', 2171);
     define('STROKE_WIDTH', '4');
     

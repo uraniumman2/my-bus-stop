@@ -36,6 +36,20 @@ class BoundaryManager {
         );
     }
 
+    public function getCropBoundaries($iOffsetX, $iOffsetY) {
+        $iCropMinX = (($this->iMinX - $iOffsetX) < 0) ? 0 : ($this->iMinX - $iOffsetX);
+        $iCropMaxX = (($this->iMaxX + $iOffsetX) > CANVAS_WIDTH) ? CANVAS_WIDTH : ($this->iMaxX + $iOffsetX);
+        $iCropMinY = (($this->iMinY - $iOffsetY) < 0) ? 0 : ($this->iMinY - $iOffsetY);
+        $iCropMaxY = (($this->iMaxY + $iOffsetY) > CANVAS_HEIGHT) ? CANVAS_HEIGHT : ($this->iMaxY + $iOffsetY);
+
+        return array(
+            $iCropMinX,
+            $iCropMaxX,
+            $iCropMinY,
+            $iCropMaxY
+        );
+    }
+
     public function compareCoords($iCoordX, $iCoordY)
     {
         // Сравнения оси X
