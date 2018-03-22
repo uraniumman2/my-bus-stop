@@ -100,6 +100,7 @@ class Util
 
     public static function getPolyline($aRoute, $sColor, $sBusNumber)
     {
+
         $sPolyline = '<polyline points="';
         foreach ($aRoute AS $sCoord) {
             $sPolyline .= $sCoord . ' ';
@@ -137,13 +138,13 @@ class Util
         $file = '../src/map_template.txt';
         $sMapTemplate = file_get_contents($file);
 
-        // Processing
-        $oBoundaryMngr = \model\BoundaryManager::getInstance();
-        $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(100, 100);
-        list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
-        print_r($aViewBoxBoundaries);
-        $sSVGHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
+            // Processing
+            $oBoundaryMngr = \model\BoundaryManager::getInstance();
+            $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(100, 100);
+            list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
+
+            $sSVGHeader  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
 
         $sMapTemplate = $sSVGHeader . $sMapTemplate;
         $sMapTemplate .= $sPolylines;
