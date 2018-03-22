@@ -16,3 +16,5 @@
     define('RAINBOW_OFFSET_X', '4');
     define('RAINBOW_OFFSET_Y', '4');
     define('CIRCLE_RADIUS', '10');
+    define('CROP_PADDING_OFFSET_X', 75);
+    define('CROP_PADDING_OFFSET_Y', 50);

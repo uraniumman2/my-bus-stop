@@ -83,8 +83,8 @@ class LayoutManager {
 
         $sLayoutTemplate  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $sLayoutTemplate .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"{$iLayoutWidth}\" height=\"{$iLayoutHeight}\" viewBox=\"0 0 {$iLayoutWidth} {$iLayoutHeight}\" version=\"1.1\">\n";
-        $sLayoutTemplate .= self::drawHeader($sBusCaptionKaz, $sBusCaptionEng);
         $sLayoutTemplate .= $sMap;
+        $sLayoutTemplate .= self::drawHeader($sBusCaptionKaz, $sBusCaptionEng);
         $sLayoutTemplate .= $sLegend;
         $sLayoutTemplate .= self::drawFooter();
         $sLayoutTemplate .= "</svg>"; // END SVG TAG
