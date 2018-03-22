@@ -5,7 +5,7 @@ namespace model;
 class ColorManager
 {
     private $aMatches = array();
-    private $aColors = array('#ee1d23', '#f58220', '#2e3092', '#00aeef', '#00a54f', '#a54586', '#6c6d70','#188500' , '#990000');
+    private $aColors = array('#ee1d23', '#2e3092', '#f58220', '#00aeef', '#00a54f', '#a54586', '#6c6d70','#188500' , '#990000');
     private $iAvailableColor = 0;
     private static $oInstance;
     const INITIAL_COLOR_VAL = 0;
