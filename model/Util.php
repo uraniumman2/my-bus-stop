@@ -131,7 +131,7 @@ class Util
         return $sStartStopCircle;
     }
 
-    public static function getSVGTemplate($sPolylines)
+    public static function getSVGMap($sPolylines)
     {
         // Fetching data
         $file = '../src/map_template.txt';
