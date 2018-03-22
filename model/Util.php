@@ -33,7 +33,6 @@
         }
 
         static function getForwardBusStops($aBusStops, $sCurCoord) {
-            $oBoundaryMngr = \model\BoundaryManager::getInstance();
             $aData = array();
             $isFound = false;
             // print_r($sCurCoord);
@@ -45,7 +44,6 @@
                     $dNewY   = self::getConvertedValue($aBusStop['Coord']['Lng'], START_LTD, Y_MULTIPLIER);
                     $dNewX   = self::getConvertedValue($aBusStop['Coord']['Ltd'], START_LNG, X_MULTIPLIER);
                     $aData[] = self::getXYString($dNewX, $dNewY);
-                    $oBoundaryMngr->compareCoords($dNewX, $dNewY);
                 }
             }
             return $aData;
@@ -54,6 +52,7 @@
         static function getForwardBusRoute($aBusRoute, $sCurCoord) {
             $aData = array();
             $isFound = false;
+            $oBoundaryMngr = \model\BoundaryManager::getInstance();
             foreach($aBusRoute AS $sKey => &$aBusPoint) {
                 if($sCurCoord == json_encode($aBusPoint)) {
                     $isFound = true;
@@ -62,6 +61,7 @@
                     $dNewY   = self::getConvertedValue($aBusPoint['Lng'], START_LTD, Y_MULTIPLIER);
                     $dNewX   = self::getConvertedValue($aBusPoint['Ltd'], START_LNG, X_MULTIPLIER);
                     $aData[] = self::getXYString($dNewX, $dNewY);
+                    $oBoundaryMngr->compareCoords( $dNewX,CANVAS_HEIGHT - $dNewY );
                 }
             }
             return $aData;
@@ -102,10 +102,11 @@
             // Processing
             $oBoundaryMngr = \model\BoundaryManager::getInstance();
             $aViewBoxBoundaries = $oBoundaryMngr->getCropBoundaries(200, 200);
-            list($iMinX, $iMaxX, $iMinY, $iMaxY) = $aViewBoxBoundaries;
+            list($iViewBoxStartX, $iViewBoxWidth, $iViewBoxStartY, $iViewBoxHeight) = $aViewBoxBoundaries;
+            print_r($aViewBoxBoundaries);
 
             $sSVGHeader  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-            $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iMinX} {$iMinY} {$iMaxX} {$iMaxY}\" version=\"1.1\">\n";
+            $sSVGHeader .= "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"2171pt\" height=\"1839pt\" viewBox=\"{$iViewBoxStartX} {$iViewBoxStartY} {$iViewBoxWidth} {$iViewBoxHeight}\" version=\"1.1\">\n";
 
             $sMapTemplate = $sSVGHeader . $sMapTemplate;
             $sMapTemplate .= $sPolylines;

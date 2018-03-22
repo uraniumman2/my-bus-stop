@@ -44,9 +44,9 @@ class BoundaryManager {
 
         return array(
             $iCropMinX,
-            $iCropMaxX,
+            ($iCropMaxX-$iCropMinX),
             $iCropMinY,
-            $iCropMaxY
+            ($iCropMaxY-$iCropMinY)
         );
     }
 
@@ -55,13 +55,13 @@ class BoundaryManager {
         // Сравнения оси X
         if ($iCoordX > $this->iMaxX)
             $this->iMaxX = $iCoordX;
-        elseif($iCoordX < $this->iMinX)
+        if($iCoordX < $this->iMinX)
             $this->iMinX = $iCoordX;
 
         // Сравнения оси Y
         if ($iCoordY > $this->iMaxY)
             $this->iMaxY = $iCoordY;
-        elseif($iCoordY < $this->iMinY)
+        if($iCoordY < $this->iMinY)
             $this->iMinY = $iCoordY;
     }
 
