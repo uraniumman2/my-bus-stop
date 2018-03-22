@@ -12,5 +12,5 @@
     define('Y_MULTIPLIER', '7119.63');
     define('CANVAS_HEIGHT', 1839);
     define('CANVAS_WIDTH', 2171);
-    define('STROKE_WIDTH', '4');
+    define('STROKE_WIDTH', '1.4');
     
