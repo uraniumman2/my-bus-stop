@@ -131,6 +131,13 @@ class Util
         return $sStartStopCircle;
     }
 
+    public static function getImportantStopCircle($sCurCoord)
+    {
+        list($dX, $dY) = explode(",", $sCurCoord);
+        $sImportantStopCircle = "<circle cx=\"{$dX}\" cy=\"{$dY}\" r=\"6\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2\"/>";
+        return $sImportantStopCircle;
+    }
+
     public static function getSVGMap($sPolylines)
     {
         // Fetching data
