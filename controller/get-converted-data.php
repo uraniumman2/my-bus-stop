@@ -41,11 +41,14 @@ foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
     }
 }
 
-
 foreach ($aBusCollection AS $i => $sBusId) {
     $sPolylines .= model\Util::getPolyline($aAllBusRoutes[count($aAllBusRoutes)-$i-1], $oColorMngr->getColor($sBusId),$aBusNumber[count($aBusNumber)-$i-1]);
 }
 //echo model\Util::getStartStopCircle($sCurCoord);
+foreach($aAllBusStops as $sId => $sConvertedCoord){
+    $sPolylines .= model\Util::getImportantStopCircle($sConvertedCoord);
+}
+
 $sPolylines .= model\Util::getStartStopCircle($sCurCoord);
 
 
