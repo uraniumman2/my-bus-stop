@@ -6,7 +6,7 @@
     require('../model/LayoutManager.php');
 
 $aRequestData = json_decode(file_get_contents('php://input'), true);
- print_r($aRequestData);
+// print_r($aRequestData);
 $aBuses = json_decode($aRequestData['buses'], true);
 $sCurCoord = $aRequestData['current_coord'];
 $dOffsetX = RAINBOW_OFFSET_X;
@@ -15,6 +15,7 @@ $sPolylines = '';
 $oColorMngr = model\ColorManager::getInstance();
 $oColorMngr->clearMatches();
 $aAllBusRoutes = array();
+$aAllBusStops = array();
 $aBusCollection = array();
 $aBusNumber = array();
 foreach ($aBuses AS $sBusId) {
@@ -26,12 +27,13 @@ foreach ($aBuses AS $sBusId) {
     $aBusNumber[] = $aBusInfo['bus_number'];
     $aBusCollection[] = $sBusId;
     $aAllBusRoutes[] = $aBusInfo['route'];
-
+    $aAllBusStops = $aAllBusStops + $aBusInfo['stops'];
 
     // if successful assign color to bus id
     $oColorMngr->setColor($sBusId);
 
 }
+//var_dump($aAllBusStops);
 
 foreach ($aAllBusRoutes as $i => &$aBusRoutesI) {
     foreach ($aBusRoutesI as &$sRouteI) {

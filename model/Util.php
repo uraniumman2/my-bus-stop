@@ -53,7 +53,7 @@ class Util
             if ($isFound) {
                 $dNewY = self::getConvertedValue($aBusStop['Coord']['Lng'], START_LTD, Y_MULTIPLIER);
                 $dNewX = self::getConvertedValue($aBusStop['Coord']['Ltd'], START_LNG, X_MULTIPLIER);
-                $aData[] = self::getXYString($dNewX, $dNewY);
+                $aData[$aBusStop['BusStopId']] = self::getXYString($dNewX, $dNewY);
             }
         }
         return $aData;
