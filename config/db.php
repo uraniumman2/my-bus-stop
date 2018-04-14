@@ -79,7 +79,7 @@ function updateDateBase($conn)
 // mysqli_query($conn, "DELETE FROM bus_stops_list");
 // foreach($aStops AS $iKey => $aValue) {
 //     // Заполняем новыми данными
-//     $query = "INSERT INTO bus_stops_list(bus_stop_id, caption, coord, buses) VALUES('$iKey', '" .$aValue["caption"]. "', '". json_encode($aValue["coord"]) ."', '". json_encode($aValue["buses"]) ."')";
+//     $query = "INSERT INTO bus_stops_list(bus_stop_id, caption, coord, buses, rank) VALUES('$iKey', '" .$aValue["caption"]. "', '". json_encode($aValue["coord"]) ."', '". json_encode($aValue["buses"]) ."', '". count($aValue["buses"]) ."')";
 //     mysqli_query($conn, $query);
 // }
 // // var_dump($aBuses);
